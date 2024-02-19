@@ -15,7 +15,7 @@ class MediaServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->hasMigration('add_soft_deletes_to_media_table')
-            ->name('media');
+            ->name('media')
+            ->hasMigration('add_soft_deletes_to_media_table');
     }
 }
