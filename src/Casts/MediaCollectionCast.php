@@ -2,9 +2,9 @@
 
 namespace MohSlimani\Media\Casts;
 
-use MohSlimani\Media\Models\Media;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use MohSlimani\Media\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 
 class MediaCollectionCast implements CastsAttributes
@@ -12,7 +12,7 @@ class MediaCollectionCast implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
@@ -30,7 +30,7 @@ class MediaCollectionCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {

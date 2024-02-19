@@ -9,8 +9,6 @@ use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 
 class MediaLibraryPathGenerator extends DefaultPathGenerator
 {
-
-
     /**
      * Get a unique base path for the given media.
      *
@@ -23,10 +21,9 @@ class MediaLibraryPathGenerator extends DefaultPathGenerator
         $model = $media->model;
         $reflectionClass = new ReflectionClass($model);
 
-
-        $path = $prefix . '/';
-        $path .= str($reflectionClass->getShortName())->plural()->value() . '/';
-        $path .= $model->id . '/';
+        $path = $prefix.'/';
+        $path .= str($reflectionClass->getShortName())->plural()->value().'/';
+        $path .= $model->id.'/';
         $path .= $media->collection_name;
 
         return $path;

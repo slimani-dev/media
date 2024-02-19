@@ -2,8 +2,8 @@
 
 namespace MohSlimani\Media\Traits;
 
-use MohSlimani\Media\Casts\MediaCollectionCast;
 use MohSlimani\Media\Casts\MediaCast;
+use MohSlimani\Media\Casts\MediaCollectionCast;
 use MohSlimani\Media\Media;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -19,7 +19,8 @@ trait UseMediaModel
     /**
      * The relationship counts that should be eager loaded on every query.
      *
-     * @var array<string, int> $files
+     * @var array<string, int>
+     *
      * @example ['photo' => Media::SINGLE_FILE, 'files' => Media::MULTIPLE_FILES]
      */
     protected array $files = [];
@@ -27,8 +28,6 @@ trait UseMediaModel
     /**
      * This method is called upon instantiation of the Eloquent Model.
      * It adds fields to the "$casts" and "$appends" arrays. of the model.
-     *
-     * @return void
      */
     public function initializeSEOTrait(): void
     {
