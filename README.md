@@ -25,9 +25,7 @@ php artisan vendor:publish --tag="media-migrations"
 php artisan migrate
 ```
 
-### Optional
-
-you can change the path generator in the media library config file
+change the media_model in the media library config file
 
 `config/media-library.php`
 
@@ -39,7 +37,13 @@ you can change the path generator in the media library config file
      */
     'media_model' => MohSlimani\Media\Models\Media::class,
     
-    
+    ...    
+
+```
+
+**Optional :** you can change the path generator in the media library config file
+
+```php
 
     ...
     
