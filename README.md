@@ -34,6 +34,14 @@ you can change the path generator in the media library config file
 ```php
 
     ...
+    /*
+     * The fully qualified class name of the media model.
+     */
+    'media_model' => MohSlimani\Media\Models\Media::class,
+    
+    
+
+    ...
     
     /*
      * The class that contains the strategy for determining a media file's path.
