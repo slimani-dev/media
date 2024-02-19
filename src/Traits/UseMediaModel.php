@@ -17,7 +17,7 @@ trait UseMediaModel
     use InteractsWithMedia;
 
     /**
-     * The relationship counts that should be eager loaded on every query.
+     * This array should contain the list of media keys to be registered.
      *
      * @var array<string, int>
      *
@@ -32,8 +32,13 @@ trait UseMediaModel
     public function initializeSEOTrait(): void
     {
         foreach ($this->files as $key => $value) {
-            $this->casts[$key] = $value === Media::SINGLE_FILE ? MediaCast::class : MediaCollectionCast::class;
-            $this->appends[] = $key;
+            if (is_int($key)) {
+                $this->casts[$value] = MediaCast::class;
+                $this->appends[] = $value;
+            } else {
+                $this->casts[$key] = $value === Media::SINGLE_FILE ? MediaCast::class : MediaCollectionCast::class;
+                $this->appends[] = $key;
+            }
         }
 
         /**

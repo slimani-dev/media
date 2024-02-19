@@ -7,7 +7,7 @@ use ReflectionClass;
 use ReflectionException;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 
-class MediaLibraryPathGenerator extends DefaultPathGenerator
+class MediaPathGenerator extends DefaultPathGenerator
 {
     /**
      * Get a unique base path for the given media.

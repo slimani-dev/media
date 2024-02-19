@@ -2,7 +2,6 @@
 
 namespace MohSlimani\Media;
 
-use MohSlimani\Media\Commands\MediaCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -16,8 +15,7 @@ class MediaServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
+            ->hasMigration('add_soft_deletes_to_media_table')
             ->name('media');
-        // ->hasCommand(MediaCommand::class)
-        // ->hasMigration('create_media_table')
     }
 }
