@@ -66,10 +66,10 @@ trait UseMediaModel
      *
      * @throws FileDoesNotExist|FileIsTooBig|MediaCannotBeDeleted
      */
-    public function addMediaFiles(UploadedFile $file, string $collection, bool $keep = false): OriginalMedia
+    public function addMediaFiles(UploadedFile $file, string $collection, bool $keep = false, bool $preserveOriginal = false): OriginalMedia
     {
-        if (! $keep) {
-            $this->getMedia($collection)->each(fn (OriginalMedia $media) => $this->deleteMedia($media));
+        if (!$keep) {
+            $this->getMedia($collection)->each(fn(OriginalMedia $media) => $this->deleteMedia($media));
         }
 
         $fileName = $file->getClientOriginalName();
@@ -77,6 +77,12 @@ trait UseMediaModel
         $milliseconds = floor(microtime(true) * 1000);
         $code = str(base_convert(strval($milliseconds), 10, 36))->upper()->value();
 
-        return $this->addMedia($file)->usingFileName($code.'-'.$fileName)->toMediaCollection($collection);
+        $fileAdder = $this->addMedia($file)->usingFileName($code . '-' . $fileName);
+
+        if ($preserveOriginal) {
+            $fileAdder = $fileAdder->preservingOriginal();
+        }
+
+        return $fileAdder->toMediaCollection($collection);
     }
 }
