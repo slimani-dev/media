@@ -5,6 +5,7 @@ namespace MohSlimani\Media\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use MohSlimani\Media\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 
 class MediaCast implements CastsAttributes
 {
@@ -15,7 +16,7 @@ class MediaCast implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): ?array
     {
-        /** @var App\Models\User $model */
+        /** @var HasMedia $model */
         /** @var Media $media */
         $media = $model->getMedia($key)->last();
 
