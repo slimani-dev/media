@@ -6,8 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/moh-slimani/media.svg?style=flat-square)](https://packagist.org/packages/moh-slimani/media)
 
 This package simplifies the integration of Spatie MediaLibrary by offering a streamlined approach to registering
-and managing media assets within Laravel applications,  effortlessly cast media to a simple format, leveraging a 
-path generator that enhances readability and organization. Seamlessly handle media registration 
+and managing media assets within Laravel applications, effortlessly cast media to a simple format, leveraging a
+path generator that enhances readability and organization. Seamlessly handle media registration
 while maintaining all functionalities of The MediaLibrary package.
 
 ## Installation
@@ -93,7 +93,14 @@ After that you can add files it like you used to using the `medialibrary` packag
 /** @var File $photo */
 $user->addMedia($photo)->toMediaCollection('photo');
 
+// Or use the included function
+$user->addMediaFiles($photo, 'photo');
 ```
+
+> the function addMediaFiles to simplify the process of adding media files to collections. This function allows you to
+> add a single file to a specified collection and provides an option to keep or delete existing files in the collection.
+> it will also generate a unique code based on current time to prepend to the file name
+> You can find more information about this and other changes in the [CHANGELOG](CHANGELOG.md).
 
 you can get the files like this
 
@@ -119,7 +126,6 @@ you can get the files like this
 
 
 ```
-
 
 ## Testing
 
