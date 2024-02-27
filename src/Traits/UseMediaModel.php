@@ -68,8 +68,8 @@ trait UseMediaModel
      */
     public function addMediaFiles(UploadedFile $file, string $collection, bool $keep = false, bool $preserveOriginal = false): OriginalMedia
     {
-        if (!$keep) {
-            $this->getMedia($collection)->each(fn(OriginalMedia $media) => $this->deleteMedia($media));
+        if (! $keep) {
+            $this->getMedia($collection)->each(fn (OriginalMedia $media) => $this->deleteMedia($media));
         }
 
         $fileName = $file->getClientOriginalName();
@@ -77,7 +77,7 @@ trait UseMediaModel
         $milliseconds = floor(microtime(true) * 1000);
         $code = str(base_convert(strval($milliseconds), 10, 36))->upper()->value();
 
-        $fileAdder = $this->addMedia($file)->usingFileName($code . '-' . $fileName);
+        $fileAdder = $this->addMedia($file)->usingFileName($code.'-'.$fileName);
 
         if ($preserveOriginal) {
             $fileAdder = $fileAdder->preservingOriginal();
