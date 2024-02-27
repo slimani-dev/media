@@ -64,21 +64,19 @@ trait UseMediaModel
     /**
      * add the media files
      *
-     * @throws  FileDoesNotExist|FileIsTooBig|MediaCannotBeDeleted
+     * @throws FileDoesNotExist|FileIsTooBig|MediaCannotBeDeleted
      */
-
     public function addMediaFiles(UploadedFile $file, string $collection, bool $keep = false): OriginalMedia
     {
-        if (!$keep) {
-            $this->getMedia($collection)->each(fn(OriginalMedia $media) => $this->deleteMedia($media));
+        if (! $keep) {
+            $this->getMedia($collection)->each(fn (OriginalMedia $media) => $this->deleteMedia($media));
         }
-
 
         $fileName = $file->getClientOriginalName();
 
         $milliseconds = floor(microtime(true) * 1000);
         $code = str(base_convert(strval($milliseconds), 10, 36))->upper()->value();
 
-        return $this->addMedia($file)->usingFileName($code . '-' . $fileName)->toMediaCollection($collection);
+        return $this->addMedia($file)->usingFileName($code.'-'.$fileName)->toMediaCollection($collection);
     }
 }
