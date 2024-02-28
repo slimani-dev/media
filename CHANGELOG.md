@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 0.0.9
+
+### Changed
+- In `MediaCast.php`:
+    - Adjusted the `get` method signature to remove unnecessary spacing in the PHPDoc block.
+    - Added a condition to return the value if it's an instance of `Media`.
+- In `MediaCollectionCast.php`:
+    - Added a condition to return the value if it's not an array, empty, or if its elements are instances of `Media`.
+
 ##  V 0.0.8
 
 ### Changed
