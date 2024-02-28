@@ -2,6 +2,7 @@
 
 namespace MohSlimani\Media\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as BaseModel;
@@ -13,31 +14,41 @@ class Media extends BaseModel
     /**
      * get the cast object
      */
-    public function getCastObject(): array
+    public function toArray(): array
     {
-        $disk = $this->disk;
+        return $this->only(['id', 'name', 'type', 'size', 'mime', 'url', 'created_at', 'updated_at']);
+    }
 
-        if ($disk === 's3') {
-            if (Cache::has('s3_temporary_url_'.$this->id)) {
-                $url = Cache::get('s3_temporary_url_'.$this->id);
-            } else {
-                $time = now()->addHours(4);
-                $url = $this->getTemporaryUrl($time);
-                Cache::put('s3_temporary_url_'.$this->id, $url, $time);
-            }
-        } else {
-            $url = $this->getFullUrl();
-        }
+    protected $appends = [
+        'url',
+        'mime'
+    ];
 
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'url' => $url,
-            'size' => $this->size,
-            'mime' => $this->mime_type,
-            'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ];
+    public function url(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value) {
+                if ($this->disk === 's3') {
+                    if (Cache::has('s3_temporary_url_' . $this->id)) {
+                        $url = Cache::get('s3_temporary_url_' . $this->id);
+                    } else {
+                        $time = now()->addHours(4);
+                        $url = $this->getTemporaryUrl($time);
+                        Cache::put('s3_temporary_url_' . $this->id, $url, $time);
+                    }
+                } else {
+                    $url = $this->getFullUrl();
+                }
+
+                return $url;
+            },
+        );
+    }
+
+    public function mime(): Attribute
+    {
+        return Attribute::make(
+            get: fn(mixed $value, array $attributes) => $attributes['mime_type'],
+        );
     }
 }

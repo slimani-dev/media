@@ -64,14 +64,10 @@ trait UseMediaModel
     /**
      * add the media files
      *
-     * @throws FileDoesNotExist|FileIsTooBig|MediaCannotBeDeleted
+     * @throws FileDoesNotExist|FileIsTooBig
      */
-    public function addMediaFiles(UploadedFile $file, string $collection, bool $keep = false, bool $preserveOriginal = false): OriginalMedia
+    public function addMediaFiles(UploadedFile $file, string $collection, bool $preserveOriginal = false): OriginalMedia
     {
-        if (! $keep) {
-            $this->getMedia($collection)->each(fn (OriginalMedia $media) => $this->deleteMedia($media));
-        }
-
         $fileName = $file->getClientOriginalName();
 
         $milliseconds = floor(microtime(true) * 1000);

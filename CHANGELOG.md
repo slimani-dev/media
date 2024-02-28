@@ -1,6 +1,26 @@
 # Changelog
 
-## v 0.0.6
+## V 0.0.7
+
+### Changed
+- Modified `MediaCast` class:
+    - Updated `set` method to clear media collection before adding new files.
+    - Added a check to ensure `UploadedFile` is passed as value parameter.
+- Modified `MediaCollectionCast` class:
+    - Updated `set` method to clear media collection before adding new files.
+    - Added a check to ensure `UploadedFile[]` is passed as value parameter.
+- Modified `Media` model:
+    - Renamed `getCastObject` method to `toArray`.
+    - Updated `toArray` method to include only specific attributes.
+    - Added `url` and `mime` attributes to the `$appends` property.
+    - Defined `url` and `mime` attributes using `Attribute` class.
+- Modified `UseMediaModel` trait:
+    - Updated `addMediaFiles` method signature to remove the `$keep` parameter.
+    - Removed `$keep` parameter usage from `addMediaFiles` method implementation.
+    - Updated the PHPDoc to reflect changes in method signature.
+
+
+## V 0.0.6
 
 ### Changed
 
