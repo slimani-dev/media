@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 use function PHPUnit\Framework\isEmpty;
 
 class MediaCollectionCast implements CastsAttributes
@@ -17,7 +18,7 @@ class MediaCollectionCast implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      * @return Media[]
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): array
@@ -36,8 +37,8 @@ class MediaCollectionCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param mixed[]|UploadedFile[]|Media[] $value
-     * @param array<string, mixed> $attributes
+     * @param  mixed[]|UploadedFile[]|Media[]  $value
+     * @param  array<string, mixed>  $attributes
      * @return Media[]
      *
      * @throws FileDoesNotExist|FileIsTooBig
@@ -45,7 +46,7 @@ class MediaCollectionCast implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): array
     {
 
-        if(!is_array($value) or isEmpty($value) or $value[0]::class === Media::class) {
+        if (! is_array($value) or isEmpty($value) or $value[0]::class === Media::class) {
             return $value;
         }
 
