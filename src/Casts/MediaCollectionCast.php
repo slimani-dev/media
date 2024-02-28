@@ -45,7 +45,7 @@ class MediaCollectionCast implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): array
     {
 
-        if (!is_array($value) or isEmpty($value) or $value[0]::class === Media::class) {
+        if (!is_array($value) or empty($value) or $value[0]::class === Media::class) {
             return $value;
         }
 
