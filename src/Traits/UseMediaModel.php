@@ -2,6 +2,7 @@
 
 namespace MohSlimani\Media\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use MohSlimani\Media\Casts\MediaCast;
 use MohSlimani\Media\Casts\MediaCollectionCast;
@@ -77,6 +78,10 @@ trait UseMediaModel
         if ($preserveOriginal) {
             $fileAdder = $fileAdder->preservingOriginal();
         }
+
+        // refresh the model after every media added
+        /** @var Model $this */
+        $this->refresh();
 
         return $fileAdder->toMediaCollection($collection);
     }

@@ -18,7 +18,7 @@ class MediaCast implements CastsAttributes
      *
      * @param  array<string, mixed>  $attributes
      */
-    public function get(Model $model, string $key, mixed $value, array $attributes): Media
+    public function get(Model $model, string $key, mixed $value, array $attributes): ?Media
     {
         /** @var HasMedia $model */
         /** @var Media $media */
@@ -35,7 +35,7 @@ class MediaCast implements CastsAttributes
      *
      * @throws FileDoesNotExist|FileIsTooBig
      */
-    public function set(Model $model, string $key, mixed $value, array $attributes): Media
+    public function set(Model $model, string $key, mixed $value, array $attributes): ?Media
     {
         /** @var UseMediaModel $model */
         $model->clearMediaCollection($key);

@@ -1,5 +1,15 @@
 # Changelog
 
+##  V 0.0.8
+
+### Changed
+- Modified `MediaCast` class:
+    - Updated `get` method to return a nullable `Media` instance.
+    - Updated `set` method to return a nullable `Media` instance.
+- Modified `UseMediaModel` trait:
+    - Added logic to refresh the model after every media file is added, ensuring accurate state representation.
+
+
 ## V 0.0.7
 
 ### Changed
