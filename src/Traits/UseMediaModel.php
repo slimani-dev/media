@@ -12,7 +12,6 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as OriginalMedia;
 
 /**
- *
  * @property array $casts
  * @property array $hidden
  * @property array $appends
@@ -73,7 +72,7 @@ trait UseMediaModel
         $milliseconds = floor(microtime(true) * 1000);
         $code = str(base_convert(strval($milliseconds), 10, 36))->upper()->value();
 
-        $fileAdder = $this->addMedia($file)->usingFileName($code . '-' . $fileName);
+        $fileAdder = $this->addMedia($file)->usingFileName($code.'-'.$fileName);
 
         if ($preserveOriginal) {
             $fileAdder = $fileAdder->preservingOriginal();
