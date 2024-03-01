@@ -1,27 +1,36 @@
 # Changelog
 
+## Version 0.0.12
+
+### Fixes
+
+- fixed some code style problems
+- fixed some logic problems
+
 ## Version 0.0.9
 
 ### Changed
+
 - In `MediaCast.php`:
     - Adjusted the `get` method signature to remove unnecessary spacing in the PHPDoc block.
     - Added a condition to return the value if it's an instance of `Media`.
 - In `MediaCollectionCast.php`:
     - Added a condition to return the value if it's not an array, empty, or if its elements are instances of `Media`.
 
-##  V 0.0.8
+## V 0.0.8
 
 ### Changed
+
 - Modified `MediaCast` class:
     - Updated `get` method to return a nullable `Media` instance.
     - Updated `set` method to return a nullable `Media` instance.
 - Modified `UseMediaModel` trait:
     - Added logic to refresh the model after every media file is added, ensuring accurate state representation.
 
-
 ## V 0.0.7
 
 ### Changed
+
 - Modified `MediaCast` class:
     - Updated `set` method to clear media collection before adding new files.
     - Added a check to ensure `UploadedFile` is passed as value parameter.
@@ -37,7 +46,6 @@
     - Updated `addMediaFiles` method signature to remove the `$keep` parameter.
     - Removed `$keep` parameter usage from `addMediaFiles` method implementation.
     - Updated the PHPDoc to reflect changes in method signature.
-
 
 ## V 0.0.6
 
