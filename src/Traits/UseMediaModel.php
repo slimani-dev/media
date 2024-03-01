@@ -2,7 +2,6 @@
 
 namespace MohSlimani\Media\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use MohSlimani\Media\Casts\MediaCast;
 use MohSlimani\Media\Casts\MediaCollectionCast;
@@ -13,6 +12,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as OriginalMedia;
 
 /**
+ *
  * @property array $casts
  * @property array $hidden
  * @property array $appends
@@ -73,15 +73,16 @@ trait UseMediaModel
         $milliseconds = floor(microtime(true) * 1000);
         $code = str(base_convert(strval($milliseconds), 10, 36))->upper()->value();
 
-        $fileAdder = $this->addMedia($file)->usingFileName($code.'-'.$fileName);
+        $fileAdder = $this->addMedia($file)->usingFileName($code . '-' . $fileName);
 
         if ($preserveOriginal) {
             $fileAdder = $fileAdder->preservingOriginal();
         }
 
         // refresh the model after every media added
-        /** @var Model $this */
-        $this->refresh();
+        if (method_exists($this, 'refresh')) {
+            $this->refresh();
+        }
 
         return $fileAdder->toMediaCollection($collection);
     }

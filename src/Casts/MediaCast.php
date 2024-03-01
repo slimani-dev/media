@@ -16,7 +16,11 @@ class MediaCast implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param  array<string, mixed>  $attributes
+     * @param Model $model
+     * @param string $key
+     * @param mixed $value
+     * @param array<string, mixed> $attributes
+     * @return Media|null
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): ?Media
     {
@@ -30,10 +34,15 @@ class MediaCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param  mixed|UploadedFile|Media  $value
-     * @param  array<string, mixed>  $attributes
+     * @param Model $model
+     * @param string $key
+     * @param mixed|UploadedFile|Media $value
+     * @param array<string, mixed> $attributes
      *
-     * @throws FileDoesNotExist|FileIsTooBig
+     * @return Media|null
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @uses HasMedia|UseMediaModel
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): ?Media
     {
@@ -41,9 +50,13 @@ class MediaCast implements CastsAttributes
             return $value;
         }
 
-        /** @var UseMediaModel $model */
-        $model->clearMediaCollection($key);
-        $model->addMediaFiles($value, $key);
+        if (method_exists($model, 'clearMediaCollection')) {
+            $model->clearMediaCollection($key);
+        }
+
+        if (method_exists($model, 'addMediaFiles')) {
+            $model->addMediaFiles($value, $key);
+        }
 
         return $model[$key];
     }
