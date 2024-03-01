@@ -65,7 +65,7 @@ trait UseMediaModel
      *
      * @throws FileDoesNotExist|FileIsTooBig
      */
-    public function addMediaFiles(UploadedFile $file, string $collection, bool $preserveOriginal = false): OriginalMedia
+    public function addMediaFile(UploadedFile $file, string $collection, bool $preserveOriginal = false): OriginalMedia
     {
         $fileName = $file->getClientOriginalName();
 
@@ -76,11 +76,6 @@ trait UseMediaModel
 
         if ($preserveOriginal) {
             $fileAdder = $fileAdder->preservingOriginal();
-        }
-
-        // refresh the model after every media added
-        if (method_exists($this, 'refresh')) {
-            $this->refresh();
         }
 
         return $fileAdder->toMediaCollection($collection);
