@@ -16,7 +16,13 @@ class Media extends BaseModel
      */
     public function toArray(): array
     {
-        return $this->only(['id', 'name', 'type', 'size', 'mime', 'url', 'created_at', 'updated_at']);
+        $attributes = $this->only(['id', 'name', 'type', 'size', 'mime', 'url', 'created_at', 'updated_at']);
+
+        if (app()->environment(['local', 'staging', 'testing'])) {
+            $attributes['path'] = $this->getPath();
+        }
+
+        return $attributes;
     }
 
     protected $appends = [
