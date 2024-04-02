@@ -20,7 +20,7 @@ class Media extends BaseModel
             'id', 'uuid', 'name',
             'file_name', 'disk',
             'type', 'size', 'mime',
-            'url', 'created_at', 'updated_at'
+            'url', 'created_at', 'updated_at',
         ]);
 
         if (app()->environment(['local', 'staging', 'testing'])) {
@@ -40,12 +40,12 @@ class Media extends BaseModel
         return Attribute::make(
             get: function () {
                 if ($this->disk === 's3') {
-                    if (Cache::has('s3_temporary_url_' . $this->id)) {
-                        $url = Cache::get('s3_temporary_url_' . $this->id);
+                    if (Cache::has('s3_temporary_url_'.$this->id)) {
+                        $url = Cache::get('s3_temporary_url_'.$this->id);
                     } else {
                         $time = now()->addHours(4);
                         $url = $this->getTemporaryUrl($time);
-                        Cache::put('s3_temporary_url_' . $this->id, $url, $time);
+                        Cache::put('s3_temporary_url_'.$this->id, $url, $time);
                     }
                 } else {
                     $url = $this->getFullUrl();
@@ -59,7 +59,7 @@ class Media extends BaseModel
     public function mime(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value, array $attributes) => $attributes['mime_type'],
+            get: fn (mixed $value, array $attributes) => $attributes['mime_type'],
         );
     }
 }
