@@ -21,7 +21,7 @@ class Media extends BaseModel
             'file_name', 'disk',
             'type', 'size', 'mime',
             'url', 'created_at', 'updated_at',
-            'type','mime_type'
+            'type', 'mime_type',
         ]);
 
         if (app()->environment(['local', 'staging', 'testing'])) {
