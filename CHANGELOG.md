@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.0.13
+
+### Fixes
+
+- add 'type','mime_type'
+
 ## Version 0.0.12
 
 ### Fixes
